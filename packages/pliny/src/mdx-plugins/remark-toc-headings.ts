@@ -6,7 +6,6 @@ import GithubSlugger from 'github-slugger'
 import { toString } from 'mdast-util-to-string'
 import { remark } from 'remark'
 
-const slugger = new GithubSlugger()
 
 export type TocItem = {
   value: string
@@ -20,6 +19,8 @@ export type Toc = TocItem[]
  * Extracts TOC headings from markdown file and adds it to the file's data object.
  */
 export function remarkTocHeadings() {
+  const slugger = new GithubSlugger()
+  
   return (tree: Parent, file: VFile) => {
     const toc: Toc = []
     visit(tree, 'heading', (node: Heading) => {
